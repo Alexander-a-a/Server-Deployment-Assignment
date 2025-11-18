@@ -26,18 +26,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/participants', participantsRouter );
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+// 404 handler 
+app.use((req, res) => {
+  return res.status(404).json({
+    status: "fail",
+    data: { statusCode: 404, result: "Not found" }
+  });
 });
 
-// error handler
-// Error handler – IMPORTANT: return JSON, not render()
-app.use(function (err, req, res, next) {
-  console.error(err);
+// Central error handler 
+app.use((err, req, res, next) => {
+  const status = err.httpStatus || 500;
 
-  res.status(err.status || 500).json({
-    error: err.message || 'Internal server error'
+  if (status >= 400 && status < 500) {
+    return res.status(status).json({
+      status: "fail",
+      data: {
+        statusCode: status,
+        result: err.message || "Request failed"
+      }
+    });
+  }
+
+  
+  return res.status(500).json({
+    status: "error",
+    result: "Internal Server Error"
   });
 });
 

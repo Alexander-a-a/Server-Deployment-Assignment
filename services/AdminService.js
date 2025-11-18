@@ -4,7 +4,7 @@ class AdminService {
     }
 
     async ensureDefaultAdmin() {
-        const existingAdmin = await this.Admin.finOne({
+        const existingAdmin = await this.Admin.findOne({
             where: { username: 'admin' }
         });
 
@@ -17,7 +17,19 @@ class AdminService {
     }
 
     async validateCredentials(username, password) {
+        const admin = await this.Admin.findOne({
+            where: { username: 'admin' }
+        });
 
+        if (!admin) {
+            return false;
+        }
+
+        if (admin.password !== password) {
+            return false;
+        }
+
+        return true;
     }
 }
 
