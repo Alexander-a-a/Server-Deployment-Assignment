@@ -13,3 +13,6 @@ router.get('/', async function (req, res, next) {
 
 // TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
 // router.get('/participants', isAuth, handler);
+
+
+module.exports = router;

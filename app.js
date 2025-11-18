@@ -1,19 +1,14 @@
 require('dotenv').config();
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-const db = require('./models');
-const AdminService = require('./services/AdminService');
-const adminService = new AdminService(db);
 
 
-var participantsRouter  = require('./routes/participants');
+
+var participantRouter  = require('./routes/participants');
 
 var db = require("./models");
-db.sequelize.sync({ force: false }).then(async () => {
-  await adminService.ensureDefaultAdmin();
-})
+
 
 var app = express();
 
@@ -24,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use('/participants', participantsRouter );
+app.use('/participants', participantRouter );
 
 // 404 handler 
 app.use((req, res) => {

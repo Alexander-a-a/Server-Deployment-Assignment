@@ -7,6 +7,12 @@
 var app = require('../app');
 var http = require('http');
 require('dotenv').config()
+
+// Models and AdminService
+const db = require('../models');
+const AdminService = require('../services/AdminService');
+const adminService = new AdminService(db);
+
 /**
  * Get port from environment and store in Express.
  */
@@ -24,7 +30,21 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+// Sync db and seed admin 
+db.sequelize
+  .sync({ force: false })
+  .then(async () => {
+    await adminService.ensureDefaultAdmin();  
+    console.log('Default admin seeded');
+
+    
+    server.listen(port);
+  })
+  .catch((err) => {
+    console.error('Failed to sync DB or seed admin:', err);
+    process.exit(1); // exit if startup fails
+  });
+
 server.on('error', onError);
 server.on('listening', onListening);
 

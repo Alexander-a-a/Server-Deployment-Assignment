@@ -1,5 +1,5 @@
-const db = require("./models");
-const AdminService = require("./services/AdminService");
+const db = require("../models");
+const AdminService = require("../services/AdminService");
 const adminService = new AdminService(db);
 
 async function isAuth(req, res, next) {
