@@ -80,6 +80,17 @@ class ParticipantService {
       throw err;
     }
 
+    const existing = await this.Participant.findOne({
+      where: { email: emailNorm }
+    });
+
+    if (existing) {
+      const err = new Error("Email already exists");
+      err.httpStatus = 400;
+      err.code = "APP_BAD_REQUEST";
+      throw err;
+    }
+
     const dobRegex = /^\d{4}-\d{2}-\d{2}$/;
 
     if (!dobRegex.test(dob)) {

@@ -4,15 +4,17 @@
 
 # Description
 
-* A ExpressJS API for managing census participants
+* A ExpressJS API for managing census participants.
 
-* The app seeds the admin user in the db on startup if its not already created
+* The app seeds the admin user in the db on startup if its not already created.
 
-* MySQL database hosted on **Aiven**
+* Stores participant, work and home details in a normalized MySQL schema.
 
-* Deployed on **Render**
+* MySQL database hosted on **Aiven**.
 
-* All endpoints protected with Basic Auth (admin/P4ssword)
+* Deployed on **Render**.
+
+* All endpoints protected with Basic Auth (admin/P4ssword).
 
 # Tech Stack
 
@@ -42,6 +44,8 @@
    DATABASE_PORT=24146
    HOST=mysql-xxxxxxx-xxxx.h.aivencloud.com
    ```
+
+   ```ADMIN_USERNAME``` and ```ADMIN_PASSWORD``` are the Aiven MySQL database credentials.
 
 4. ```npm start```
 
@@ -74,12 +78,14 @@ In **Postman**
 
 # Endpoints overview
 
+All endpoints return JSON responses
+
 * ```POST /participants/add```
     Create a new participant (with nested ```participant```, ```work```, ```home``` objects)
 * ```GET /participants```
     Get all participants, including work and home details.
 * ```GET /participants/details```
-    Get basic personal details (email, firstname, lastname, dob) for all participants.
+    Get basic personal details (email, firstname, lastname) for all participants.
 * ```GET /participants/details/:email```
     Get personal details (firstname, lastname, dob) for a specific participant.
 * ```GET /participants/work/:email```
