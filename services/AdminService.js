@@ -18,7 +18,7 @@ class AdminService {
 
     async validateCredentials(username, password) {
         const admin = await this.Admin.findOne({
-            where: { username: 'admin' }
+            where: { username }
         });
 
         if (!admin) {
