@@ -6,7 +6,7 @@
 
 * A ExpressJS API for managing census participants.
 
-* The app seeds the admin user in the db on startup if its not already created.
+* The app seeds the admin user in the DB on startup if its not already created.
 
 * Stores participant, work and home details in a normalized MySQL schema.
 

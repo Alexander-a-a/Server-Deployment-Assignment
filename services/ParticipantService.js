@@ -154,7 +154,7 @@ class ParticipantService {
     const cityNorm = (city || "").trim();
 
     if (!cityNorm) {
-      const err = new Error("city is required");
+      const err = new Error("City is required");
       err.httpStatus = 400;
       err.code = "APP_BAD_REQUEST";
       throw err;
@@ -442,7 +442,7 @@ class ParticipantService {
     const cityNorm = (city || "").trim();
 
     if (!cityNorm) {
-      const err = new Error("city is required");
+      const err = new Error("City is required");
       err.httpStatus = 400;
       err.code = "APP_BAD_REQUEST";
       throw err;
